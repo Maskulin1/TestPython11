@@ -1,7 +1,7 @@
 av==12.1.0
 mediapipe==0.10.14
 numpy==1.26.4
-opencv-contrib-python==4.10.0.68
+opencv-contrib-python==4.10.0.84
 opencv-python==4.7.0.68
 pyttsx3==2.90
 streamlit==1.35.0
