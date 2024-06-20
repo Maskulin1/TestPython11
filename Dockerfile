@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
 # Set environment variable to avoid interaction issues
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set the working directory to the root
-WORKDIR /
+# Set the working directory
+WORKDIR /app
 
 # Copy the requirements file into the container
 COPY requirements.txt .
@@ -24,7 +24,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy the rest of the application code into the container
-COPY . .
+COPY . /app
 
 # Expose the port that Streamlit will run on
 EXPOSE 8080
