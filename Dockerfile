@@ -26,4 +26,4 @@ COPY . .
 EXPOSE 8501
 
 # Perintah untuk menjalankan aplikasi Streamlit
-CMD ["streamlit", "run", "inference_classifier.py"]
+CMD ["streamlit", "run", "inference_classifier.py", "--server.port=8080", "--server.address=0.0.0.0"]
