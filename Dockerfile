@@ -1,29 +1,32 @@
-# Gunakan image Python 3.11.5 sebagai base image
+# Use the official Python image from the Docker Hub
 FROM python:3.11.5
 
-# Install dependensi sistem yang diperlukan
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
-    libglib2.0-0
+    libglib2.0-0 \
+    ffmpeg \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set environment variable untuk menghindari masalah interaksi pengguna
+# Set environment variable to avoid interaction issues
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Buat direktori kerja di dalam container
+# Set the working directory
 WORKDIR /app
 
-# Salin file requirements.txt ke direktori kerja
+# Copy the requirements file into the container
 COPY requirements.txt .
 
-# Install dependensi Python dari requirements.txt
+# Install Python dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Salin seluruh kode proyek ke direktori kerja
+# Copy the rest of the application code into the container
 COPY . .
 
-# Expose port yang digunakan oleh Streamlit
-EXPOSE 8501
+# Expose the port that Streamlit will run on
+EXPOSE 8080
 
-# Perintah untuk menjalankan aplikasi Streamlit
+# Command to run the Streamlit app
 CMD ["streamlit", "run", "inference_classifier.py", "--server.port=8080", "--server.address=0.0.0.0"]
