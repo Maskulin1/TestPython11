@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
 # Set environment variable to avoid interaction issues
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Set the working directory
-WORKDIR /app
+# Set the working directory to the root
+WORKDIR /
 
 # Copy the requirements file into the container
 COPY requirements.txt .
@@ -30,4 +30,4 @@ COPY . .
 EXPOSE 8080
 
 # Command to run the Streamlit app
-CMD ["streamlit", "run", "inference_classifier.py", "--server.port=8080", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "data/inference_classifier.py", "--server.port=8080", "--server.address=0.0.0.0"]
